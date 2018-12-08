@@ -1,6 +1,5 @@
 class Spark {
   constructor () {
-    this.preview = null
     this.doc = null
 
     this.templateString = ''
@@ -24,7 +23,7 @@ class Spark {
     this.templateString = await this.getTemplate()
 
     this.pageData = (await this.getData())[this.pageDir]
-    this.setPreview(this.templateString)
+    await this.setPreview(this.templateString)
     this.setStyleRules()
     this.spark(this.doc, this.sparkSelectors)
   }
@@ -48,7 +47,6 @@ class Spark {
       })
       selectors[selectorSplited[0]] = options
     })
-    console.log(selectors)
 
     return selectors
   }
@@ -85,14 +83,21 @@ class Spark {
   }
 
   async setPreview (template) {
-    this.preview = document.getElementById('iframe')
-    this.doc = document.getElementById('iframe').contentDocument
-    this.doc.write(template)
+    const edit = document.querySelector('#edit')
+    while (edit.firstChild) {
+      edit.removeChild(edit.firstChild);
+    }
 
+    const iframe = document.createElement('iframe')
+    edit.appendChild(iframe)
+   
+    // ローディングバグ対策
     return new Promise((resolve, reject) => {
-      this.preview.addEventListener('load', (e) => {
+      setTimeout(() => {
+        this.doc = iframe.contentDocument
+        this.doc.write(template)
         resolve()
-      }, false)
+      }, 100)
     })
   }
 
@@ -104,7 +109,7 @@ class Spark {
     Object.keys(selectors).forEach((selectorKey, selectorIndex) => {
       const selector = selectors[selectorKey]
       const element = doc.querySelector(selectorKey)
-      if (element.length) return
+      if (!element) return
       if (!onlyRender) element.setAttribute('contenteditable', 'true')
 
       Object.keys(selector).forEach((optionKey, optionIndex) => {
@@ -113,7 +118,6 @@ class Spark {
           if (!onlyRender) {
             element.setAttribute('placeholder', element.innerHTML)
             element.addEventListener('input', (e) => {
-              console.log(element.innerHTML)
               this.saveData(option, element.innerHTML)
             })
           }
