@@ -13,7 +13,8 @@ if ($method == "GET") {
   echo file_get_contents('./data.json');
 } else if ($method == 'PUT') {
   $data = file_get_contents('php://input');
-  if ($json = json_decode($data, true) && file_put_contents('../' + $json['path'], $json['html'])) {
+  $json = json_decode($data, true);
+  if (file_put_contents('../' . $json['path'], $json['html'])) {
     // Success
   } else {
     error();

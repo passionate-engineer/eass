@@ -9,7 +9,8 @@ class Spark {
 
     this.sparkURL = '../config.spk'
     this.pageApiURL = './api'
-    this.templatePath = '../index.html'
+    this.templateDir = '../'
+    this.templateFile = 'index.html'
     this.pageDir = '/'
 
     this.publishApiURL = './api/publish.php'
@@ -77,7 +78,7 @@ class Spark {
 
   async getTemplate () {
     return new Promise((resolve, reject) => {
-      fetch(this.templatePath).then(response => response.text()).then((text) => {
+      fetch(this.templateDir + this.templateFile).then(response => response.text()).then((text) => {
         resolve(text)
       })
     })
@@ -134,14 +135,20 @@ class Spark {
 
   async publish () {
     const html = await this.getPageHTML()
-    await this.publishHTML(this.publishDir + this.templatePath, html)
+    await this.publishHTML(this.publishDir + this.templateFile, html)
   }
 
   async getPageHTML () {
-    const iframe = document.querySelector('#publish-iframe')
+    const publish = document.querySelector('#publish')
+    const iframe = document.createElement('iframe')
+    while (publish.firstChild) {
+      publish.removeChild(publish.firstChild);
+    }
+    publish.appendChild(iframe)
+
     const doc = iframe.contentDocument
     doc.write(this.templateString)
-    this.spark(doc, this.selectors, true)
+    this.spark(doc, this.sparkSelectors, true)
 
     const html = this.templateString.replace(/<body>[\s\S]*<\/body>/, '<body>' + doc.body.innerHTML + '</body>')
     return html
