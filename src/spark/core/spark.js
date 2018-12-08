@@ -22,8 +22,8 @@ class Spark {
     this.sparkString = await this.getSpark()
     this.sparkSelectors = this.analyzeSpark(this.sparkString)
     this.templateString = await this.getTemplate()
-    this.pageData = (await this.getData())[this.pageDir]
 
+    this.pageData = (await this.getData())[this.pageDir]
     this.setPreview(this.templateString)
     this.setStyleRules()
     this.spark(this.doc, this.sparkSelectors)
@@ -114,7 +114,7 @@ class Spark {
             element.setAttribute('placeholder', element.innerHTML)
             element.addEventListener('input', (e) => {
               console.log(element.innerHTML)
-              this.save(option, element.innerHTML)
+              this.saveData(option, element.innerHTML)
             })
           }
           element.innerHTML = this.getVariableData(option)
@@ -127,10 +127,11 @@ class Spark {
     return (this.pageData[variable]) ? this.pageData[variable] : ''
   }
 
-  async save (variable, value) {
+  async saveData (variable, value) {
     const data = await this.getData()
     data[this.pageDir][variable] = value
     await this.putData(data)
+    this.pageData = data[this.pageDir]
   }
 
   async publish () {
