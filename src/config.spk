@@ -1,0 +1,9 @@
+.text1 {
+  type: text;
+  var: text1;
+}
+
+.text2 {
+  type: text;
+  var: text2;
+}

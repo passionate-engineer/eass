@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title></title>
+    <style>
+* {
+  margin: 0;
+    padding: 0;
+}
+
+#iframe {
+  border: none;
+  width: 100vw;
+    height: 100vh;
+}
+
+#publish-iframe {
+  display: none;
+}
+
+#publish-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <iframe id="iframe"></iframe>
+      <iframe id="publish-iframe"></iframe>
+      <button id="publish-button">Publish</button>
+    </div>
+
+    <script src="./core/spark.js"></script>
+    <script>
+      const spark = new Spark()
+
+      document.querySelector('#publish-button').addEventListener('click', () => {
+        spark.publish()
+      }, false)
+    </script>
+  </body>
+</html>
+
