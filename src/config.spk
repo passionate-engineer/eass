@@ -1,9 +1,9 @@
 .text1 {
   type: text;
-  var: text1;
+  var: text6;
 }
 
 .text2 {
   type: text;
-  var: text2;
+  var: text6;
 }
