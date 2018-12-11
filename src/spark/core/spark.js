@@ -13,7 +13,7 @@ class Spark {
     this.pageDir = '/'
 
     this.publishApiURL = './api/publish.php'
-    this.publishDir = '../../dist/'
+    this.publishPath = '../xxx.html'
     this.start()
   }
 
@@ -91,6 +91,13 @@ class Spark {
     const iframe = document.createElement('iframe')
     edit.appendChild(iframe)
    
+    iframe.addEventListener('load', () => {
+      setTimeout(() => {
+        this.doc = iframe.contentDocument
+        this.spark(this.doc, this.sparkSelectors)
+      }, 100)
+    }, false)
+
     // ローディングバグ対策
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -106,15 +113,28 @@ class Spark {
   }
 
   spark (doc, selectors, onlyRender = false) {
+    if (!onlyRender) {
+      doc.querySelectorAll('a').forEach((element) => {
+        element.setAttribute('href', 'javascript:void(0)')
+      })
+
+      doc.querySelectorAll('*').forEach((element) => {
+        if (element.hasAttribute('src') && !element.getAttribute('src').match(/^http/)) element.setAttribute('src', '/' + element.getAttribute('src'))
+        if (element.hasAttribute('href') && !element.getAttribute('href').match(/^http/)) element.setAttribute('href', '/' + element.getAttribute('href'))
+      })
+    }
+
     Object.keys(selectors).forEach((selectorKey, selectorIndex) => {
       const selector = selectors[selectorKey]
-      const element = doc.querySelector(selectorKey)
+      const element = selectorKey.match(/^\/\//) ? this.xpath(doc, selectorKey)[0] : doc.querySelector(selectorKey)
+      console.log('test', selectorKey, element)
       if (!element) return
       if (!onlyRender) element.setAttribute('contenteditable', 'true')
+      console.log(selector, element)
 
       Object.keys(selector).forEach((optionKey, optionIndex) => {
         const option = selector[optionKey]
-        if (optionKey === 'var') {
+        if (optionKey === 'name') {
           if (!onlyRender) {
             element.setAttribute('placeholder', element.innerHTML)
             element.addEventListener('input', (e) => {
@@ -140,7 +160,8 @@ class Spark {
 
   async publish () {
     const html = await this.getPageHTML()
-    await this.publishHTML(this.publishDir + this.templateFile, html)
+    await this.publishHTML(this.publishPath, html)
+    alert('Published')
   }
 
   async getPageHTML () {
@@ -179,5 +200,22 @@ class Spark {
     doc.head.appendChild(style)
     style.sheet.insertRule(rule, style.sheet.cssRules.length)
   }
+
+  xpath (doc, expression) {
+    let ret = doc.evaluate(expression,doc,null,XPathResult.ANY_TYPE,null);
+    switch(ret.resultType){
+      case 1: return ret.numberValue;
+      case 2: return ret.stringValue;
+      case 3: return ret.booleanValue;
+      case 4:
+      case 5:
+        let a=[];
+        let e=''
+        while(e=ret.iterateNext()){a.push(e);};
+        return a;
+      default: return ret;
+    }
+  }
+
 }
 

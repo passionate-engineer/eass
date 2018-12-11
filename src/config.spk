@@ -1,9 +1,29 @@
-.text1 {
+#headerwrap > div > div > h1 {
+  name: text1;
   type: text;
-  var: text6;
 }
 
-.text2 {
+#headerwrap > div > div > h2 {
+  name: text2;
   type: text;
-  var: text6;
+}
+
+#headerwrap > div > div > a.btn.btn-success {
+  name: text3;
+  type: text;
+}
+
+#headerwrap > div > div > a.btn.btn-transparent {
+  name: text4;
+  type: text;
+}
+
+body > div:nth-child(3) > div > div.col-md-4.col-md-offset-2 > h3 {
+  name: text5;
+  type: text;
+}
+
+body > div:nth-child(3) > div > div.col-md-4.col-md-offset-2 > p {
+  name: text6;
+  type: text;
 }
