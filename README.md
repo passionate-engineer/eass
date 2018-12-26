@@ -1,4 +1,5 @@
-# Spark(.ess)
+# Spark
+## Editable Spark Sheet(.ess)
 Gradually adoptable JavaScript framework for building a Website template.
 
 # Ideas
@@ -11,7 +12,16 @@ Gradually adoptable JavaScript framework for building a Website template.
 # Usage
 ### 1. Load the spark library
 ```
-<script src="../spark/index.js">
+<script src="https://passionate.engineer
+<script>
+new spark({
+  editCommand: 'Ctrl + Alt + E',
+  password: true,
+  endpoint: 'http://passionate.engineer/spark/1_blog/,
+  
+})
+</script>
+<link rel="editablesheet" href="./editables.es" />
 ```
 
 ### 2. Add s-type and s-model attribute to HTML
