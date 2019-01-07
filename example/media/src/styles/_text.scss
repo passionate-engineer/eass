@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  Text
+// ***********************************************
+.text {
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-color {
+    &-accent {
+      color: map-get($color-brand, "accent");
+    }
+  }
+}
+
+.section-title {
+  font-family: $ff-mono;
+  font-weight: bold;
+  font-size: 4.0rem;
+  letter-spacing: 0.3em;
+  // white-space: nowrap;
+
+  @media #{$device-l} {
+  }
+
+  &:first-letter {
+    font-size: 7.0rem;
+
+    @media #{$device-l} {
+    }
+  }
+}
+
+%mono {
+  font-family: $ff-mono;
+  letter-spacing: 0.2em;
+}
+
+%typewrite {
+  &::after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    height: 1.0em;
+    width: 15px;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 8px;
+    vertical-align: bottom;
+    animation: blink 1.3s linear none infinite;
+  }
+}

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  Pager
+// ***********************************************
+.pager {
+  $disabled: #8a848d;
+
+  &-container {
+    position: relative;
+    display: inline-block;
+    height: 24px;
+    padding: 0 35px;
+    margin: 0 25px;
+  }
+
+  position: relative;
+  overflow: hidden;
+  height: 4px;
+  margin: 10px 0;
+
+  &-list {
+    display: block;
+    height: 100%;
+    background-color: $disabled;
+    pointer-events: none;
+
+    >li {
+      position: relative;
+      z-index: 20;
+      float: left;
+      width: 35px;
+      height: 100%;
+      vertical-align: middle;
+      border-left: 9px solid #000;
+
+      &:first-child {
+        border: none;
+      }
+    }
+  }
+
+  &-bar {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    margin: auto 0;
+    background-color: map-get($color-brand, "accent");
+    cursor: pointer;
+  }
+
+  &-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    overflow: hidden;
+    width: 13px;
+    height: 24px;
+    margin: auto 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      display: block;
+      border: 2px solid #fff;
+      border-top: none;
+      width: 14px;
+      height: 14px;
+      margin: auto 0;
+      pointer-events: none;
+    }
+
+    &.is-prev {
+      left: 0;
+
+      &::before {
+        left: 0;
+        border-right: none;
+        transform: rotate(45deg) translateY(-50%);
+        transform-origin: left center;
+      }
+    }
+
+    &.is-next {
+      right: 0;
+
+      &::before {
+        right: 0;
+        border-left: none;
+        transform: rotate(-45deg) translateY(-50%);
+        transform-origin: right center;
+      }
+    }
+
+    &.is-disabled {
+      &::before {
+        border-color: $disabled;
+      }
+    }
+  }
+}

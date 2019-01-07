@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  Base
+// ***********************************************
+.clearfix {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.pc {
+  @media #{$device-s} {
+    display: none !important;
+  }
+}
+
+.sp {
+  @media #{$device-l} {
+    display: none !important;
+  }
+}
+
+html {
+  font-family: $ff !important;
+  font-size: 10px !important;
+
+  body {
+    font-size: 1.2rem;
+
+    @media #{$device-l} {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+#container {
+  width: 100%;
+  min-width: $sp-min-width;
+  color: #333;
+
+  @media #{$device-l} {
+    min-width: $pc-max-width;
+  }
+}
+
+.contents {
+  @media #{$device-l} {
+  }
+
+  .wrap {
+    @media #{$device-l} {
+    }
+  }
+}
+
+.wrap {
+  margin: 0 20px;
+
+  @media #{$device-l} {
+    box-sizing: border-box;
+    width: $pc-min-width;
+    margin: 0 auto;
+  }
+}
+
+img {
+  max-width: 100%;
+}

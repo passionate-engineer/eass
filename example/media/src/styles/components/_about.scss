@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  About
+// ***********************************************
+
+#about {
+  position: relative;
+  margin-bottom: 100px;
+  @media #{$device-l} {
+    margin-bottom: 170px;
+  }
+  .section-title {
+    margin-bottom: 50px;
+  }
+
+  .about-text {
+    margin-left: 13%;
+    line-height: 2.5;
+    letter-spacing: 0.1em;
+
+    &:first-of-type {
+
+      &::after {
+        content: "";
+        display: block;
+        width: 50%;
+        height: 1px;
+        margin: 50px 0;
+        background-color: #fff;
+      }
+    }
+
+    &.is-english {
+      @extend %mono;
+    }
+  }
+
+  .background-image {
+    width: 83%;
+    top: 50px;
+    right: 0;
+    padding-bottom: 36%;
+    background-image: url(".#{$directory}about_bg.jpg");
+  }
+}

@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  Cntact
+// ***********************************************
+
+.contents{
+  display: none;
+  margin-bottom: 50px;
+  .section-title{
+    margin-bottom: 40px;
+  }
+  .mail-text{
+    text-align: center;
+    font-size: 1.4rem;
+    a{
+      color: #fff;
+    }
+    &:after{
+      content: "";
+      display: block;
+      height: 1px;
+      width: 10%;
+      margin: 30px auto;
+      background-color: #fff;
+    }
+  }
+  .center-list{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    li{
+      width: 18%;
+    }
+    .sns-button{
+      img{
+        width: 100%;
+      }
+    }
+  }
+  @media #{$device-l} {
+  }
+}

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+// ***********************************************
+//  members
+// ***********************************************
+
+#members{
+  position: relative;
+  margin: 100px 0;
+  .section-title {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 1.4em;
+    @media #{$device-l} {
+      margin-left: calc(50% - 1.4em);
+    }
+    .first-letter{
+      display: block;
+      margin-bottom: 110px;
+      margin-left: -1.5em;
+    }
+    .decoration-line{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 130px;
+      width: 20px;
+      span{
+        position: absolute;
+        display: block;
+        width: 2px;
+        height: 90px;
+        background-color: #fff;
+        &:nth-of-type(1){
+          height: 45px;
+          top: 45px;
+        }
+        &:nth-of-type(2){
+          height: 90px;
+          right: 0;
+        }
+        &:nth-of-type(3){
+          height: 28px;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+    .text-color-accent{
+      font-size: 4rem;
+    }
+  }
+  .member-list{
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    li{
+      width: calc(50% - 10px);
+      margin-bottom: 30px;
+      @media #{$device-l} {
+        width: calc(20% - 10px);
+        margin-right: 40px;
+        margin-bottom: 60px;
+      }
+    }
+    li:nth-child(odd){
+      margin-right: 10px;
+      @media #{$device-l} {
+        margin-right: 40px;
+      }
+    }
+  }
+  .background-image{
+    width: 83%;
+    top: 205px;
+    right: 0;
+    padding-bottom: 36%;
+    background-image: url(".#{$directory}about_bg.jpg");
+    @media #{$device-l} {
+      width: 76%;
+      top: 326px;
+    }
+  }
+}
