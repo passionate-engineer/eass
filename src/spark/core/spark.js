@@ -6,7 +6,7 @@ class Spark {
     this.sparkString = ''
     this.sparkSelectors = {}
 
-    this.sparkURL = '../config.spk'
+    this.sparkURL = './config.spk'
     this.pageApiURL = './api'
     this.templateDir = '../'
     this.templateFile = 'index.html'
@@ -119,8 +119,8 @@ class Spark {
       })
 
       doc.querySelectorAll('*').forEach((element) => {
-        if (element.hasAttribute('src') && !element.getAttribute('src').match(/^http/)) element.setAttribute('src', '/' + element.getAttribute('src'))
-        if (element.hasAttribute('href') && !element.getAttribute('href').match(/^http/)) element.setAttribute('href', '/' + element.getAttribute('href'))
+        if (element.hasAttribute('src') && !element.getAttribute('src').match(/^http/) && !element.getAttribute('src').match(/^\//)) element.setAttribute('src', '/' + element.getAttribute('src'))
+        if (element.hasAttribute('href') && !element.getAttribute('href').match(/^http/) && !element.getAttribute('href').match(/^\//)) element.setAttribute('href', '/' + element.getAttribute('href'))
       })
     }
 

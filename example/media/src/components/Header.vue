@@ -1,7 +1,11 @@
 <template>
   <header>
     <div class="header-bar">
-      <h1 class="logo"><img src="https://dariame.jp/wp-content/uploads/2018/12/名称未設定-3@4x.png" alt=""></h1>
+      <h1 class="logo">
+        <a href="javascript:void(0)">
+          <img src="https://dariame.jp/wp-content/uploads/2018/12/名称未設定-3@4x.png" alt="">
+        </a>
+      </h1>
     </div>
     <div class="navigation">
       <div class="navigation-swipe">
